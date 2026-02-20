@@ -12,6 +12,7 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    scroll-behavior: smooth;
 }
 
 body {
@@ -30,6 +31,18 @@ section {
     padding: 80px 10%;
 }
 
+/* Fade Animation */
+.fade {
+    opacity: 0;
+    transform: translateY(40px);
+    transition: all 0.8s ease;
+}
+
+.fade.show {
+    opacity: 1;
+    transform: translateY(0);
+}
+
 h1, h2, h3 {
     color: #d4af37;
 }
@@ -42,6 +55,10 @@ h1, h2, h3 {
     font-weight: 600;
     transition: 0.3s ease;
     border: 2px solid #d4af37;
+}
+
+.btn:hover {
+    transform: scale(1.05);
 }
 
 .btn-primary {
@@ -78,23 +95,12 @@ h1, h2, h3 {
 .hero-content h1 {
     font-size: 60px;
     font-weight: 700;
+    animation: fadeInDown 1.2s ease forwards;
 }
 
 .hero-content p {
     font-size: 20px;
     margin: 20px 0;
-    color: #ccc;
-}
-
-/* About */
-.about {
-    text-align: center;
-    max-width: 900px;
-    margin: auto;
-}
-
-.about p {
-    margin-top: 20px;
     color: #ccc;
 }
 
@@ -149,11 +155,6 @@ h1, h2, h3 {
     margin-top: 40px;
 }
 
-.contact-info p {
-    margin-bottom: 15px;
-    color: #ccc;
-}
-
 iframe {
     width: 100%;
     height: 300px;
@@ -167,17 +168,6 @@ footer {
     text-align: center;
     padding: 30px 10%;
     border-top: 1px solid #d4af37;
-}
-
-.social-links a {
-    margin: 0 10px;
-    color: #d4af37;
-    font-weight: 600;
-}
-
-footer p {
-    margin-top: 10px;
-    color: #777;
 }
 
 /* Responsive */
@@ -194,7 +184,6 @@ footer p {
 
 <body>
 
-<!-- Hero Section -->
 <section class="hero">
     <div class="hero-content">
         <h1>Kareem Food Restaurant</h1>
@@ -204,86 +193,70 @@ footer p {
     </div>
 </section>
 
-<!-- About Section -->
-<section class="about">
+<section class="about fade">
     <h2>About Us</h2>
     <p>
         Located in Rampur, Uttar Pradesh, Kareem Food Restaurant serves rich and authentic Mughlai & North Indian cuisine. 
-        Our chefs bring traditional recipes with royal flavors, offering a premium dining experience in an elegant and welcoming atmosphere.
+        Our chefs bring traditional recipes with royal flavors, offering a premium dining experience.
     </p>
 </section>
 
-<!-- Menu Section -->
-<section class="menu" id="menu">
+<section class="menu fade" id="menu">
     <h2 style="text-align:center;">Our Menu</h2>
     <div class="menu-container">
-
         <div class="menu-category">
             <h3>Starters</h3>
             <div class="menu-item"><span>Chicken Tikka</span><span>₹280</span></div>
             <div class="menu-item"><span>Seekh Kebab</span><span>₹250</span></div>
-            <div class="menu-item"><span>Paneer Tikka</span><span>₹220</span></div>
         </div>
-
-        <div class="menu-category">
-            <h3>Main Course</h3>
-            <div class="menu-item"><span>Butter Chicken</span><span>₹320</span></div>
-            <div class="menu-item"><span>Mutton Korma</span><span>₹380</span></div>
-            <div class="menu-item"><span>Shahi Paneer</span><span>₹260</span></div>
-        </div>
-
-        <div class="menu-category">
-            <h3>Biryani</h3>
-            <div class="menu-item"><span>Chicken Biryani</span><span>₹300</span></div>
-            <div class="menu-item"><span>Mutton Biryani</span><span>₹400</span></div>
-            <div class="menu-item"><span>Veg Biryani</span><span>₹220</span></div>
-        </div>
-
     </div>
 </section>
 
-<!-- Gallery Section -->
-<section class="gallery">
+<section class="gallery fade">
     <h2 style="text-align:center;">Gallery</h2>
     <div class="gallery-grid">
-        <img src="https://images.unsplash.com/photo-1600891964599-f61ba0e24092?auto=format&fit=crop&w=800&q=80" alt="">
-        <img src="https://images.unsplash.com/photo-1604908177522-0405f6b2b95a?auto=format&fit=crop&w=800&q=80" alt="">
-        <img src="https://images.unsplash.com/photo-1603898037225-1f0d7f8e2f6f?auto=format&fit=crop&w=800&q=80" alt="">
-        <img src="https://images.unsplash.com/photo-1625944525533-473f1b7f4b68?auto=format&fit=crop&w=800&q=80" alt="">
-        <img src="https://images.unsplash.com/photo-1617196034734-26c5a28a741b?auto=format&fit=crop&w=800&q=80" alt="">
-        <img src="https://images.unsplash.com/photo-1605475120932-8e8c6f1f5f7c?auto=format&fit=crop&w=800&q=80" alt="">
+        <img src="https://images.unsplash.com/photo-1600891964599-f61ba0e24092?auto=format&fit=crop&w=800&q=80">
+        <img src="https://images.unsplash.com/photo-1604908177522-0405f6b2b95a?auto=format&fit=crop&w=800&q=80">
     </div>
 </section>
 
-<!-- Contact Section -->
-<section class="contact">
+<section class="contact fade">
     <h2 style="text-align:center;">Contact Us</h2>
     <div class="contact-container">
-
-        <div class="contact-info">
-            <p><strong>Address:</strong> Rampur, Uttar Pradesh, India</p>
-            <p><strong>Phone:</strong> +91-XXXXXXXXXX</p>
-            <p><strong>Opening Hours:</strong> 11:00 AM – 11:00 PM</p>
-            <a href="https://wa.me/91XXXXXXXXXX" class="btn btn-primary">Chat on WhatsApp</a>
-        </div>
-
         <div>
-            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d224346.4817313848!2d79.004846!3d28.810607!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x390b5f8d3b5b5b5b%3A0x5b5b5b5b5b5b5b5b!2sRampur%2C%20Uttar%20Pradesh!5e0!3m2!1sen!2sin!4v0000000000000">
-            </iframe>
+            <p><strong>Address:</strong> Rampur, UP</p>
+            <p><strong>Phone:</strong> +91-XXXXXXXXXX</p>
         </div>
-
     </div>
 </section>
 
-<!-- Footer -->
 <footer>
-    <div class="social-links">
-        <a href="#">Facebook</a> |
-        <a href="#">Instagram</a> |
-        <a href="#">Twitter</a>
-    </div>
     <p>Demo Website – Not Official</p>
 </footer>
+
+<script>
+/* Fade on Scroll */
+const faders = document.querySelectorAll('.fade');
+
+const appearOptions = {
+    threshold: 0.2
+};
+
+const appearOnScroll = new IntersectionObserver(function(entries, observer){
+    entries.forEach(entry => {
+        if(!entry.isIntersecting){
+            return;
+        } else {
+            entry.target.classList.add('show');
+            observer.unobserve(entry.target);
+        }
+    });
+}, appearOptions);
+
+faders.forEach(fader => {
+    appearOnScroll.observe(fader);
+});
+</script>
 
 </body>
 </html>
