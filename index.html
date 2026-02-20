@@ -5,229 +5,217 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Kareem Food Restaurant | Rampur</title>
 
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+
 <style>
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap');
-
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    scroll-behavior: smooth;
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    scroll-behavior:smooth;
 }
 
-body {
-    font-family: 'Poppins', sans-serif;
-    background-color: #0f0f0f;
-    color: #f5f5f5;
-    line-height: 1.6;
+body{
+    font-family:'Poppins',sans-serif;
+    background:#0f0f0f;
+    color:#fff;
 }
 
-a {
-    text-decoration: none;
-    color: inherit;
+/* ===== Navbar ===== */
+.navbar{
+    position:fixed;
+    width:100%;
+    top:0;
+    left:0;
+    padding:15px 10%;
+    background:rgba(0,0,0,0.8);
+    backdrop-filter:blur(8px);
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    z-index:1000;
 }
 
-section {
-    padding: 80px 10%;
+.navbar a{
+    color:#d4af37;
+    margin-left:20px;
+    font-weight:500;
 }
 
-/* Fade Animation */
-.fade {
-    opacity: 0;
-    transform: translateY(40px);
-    transition: all 0.8s ease;
+.logo{
+    font-weight:700;
+    font-size:20px;
 }
 
-.fade.show {
-    opacity: 1;
-    transform: translateY(0);
+/* ===== Hero ===== */
+.hero{
+    height:100vh;
+    background:linear-gradient(rgba(0,0,0,.6),rgba(0,0,0,.6)),
+    url('https://images.unsplash.com/photo-1555396273-367ea4eb4db5?auto=format&fit=crop&w=1600&q=80')
+    center/cover no-repeat;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    text-align:center;
+    padding:0 20px;
 }
 
-h1, h2, h3 {
-    color: #d4af37;
+.hero h1{
+    font-size:60px;
+    color:#d4af37;
+    animation:fadeDown 1.2s ease forwards;
 }
 
-.btn {
-    display: inline-block;
-    padding: 12px 28px;
-    margin: 10px 10px 0 0;
-    border-radius: 50px;
-    font-weight: 600;
-    transition: 0.3s ease;
-    border: 2px solid #d4af37;
+.hero p{
+    margin:20px 0;
+    color:#ccc;
 }
 
-.btn:hover {
-    transform: scale(1.05);
+.btn{
+    display:inline-block;
+    padding:12px 28px;
+    margin:10px;
+    border-radius:50px;
+    border:2px solid #d4af37;
+    color:#d4af37;
+    transition:.3s;
 }
 
-.btn-primary {
-    background-color: #d4af37;
-    color: #000;
+.btn:hover{
+    background:#d4af37;
+    color:#000;
+    transform:scale(1.05);
 }
 
-.btn-primary:hover {
-    background-color: transparent;
-    color: #d4af37;
+/* ===== Sections ===== */
+section{
+    padding:100px 10%;
 }
 
-.btn-outline {
-    background-color: transparent;
-    color: #d4af37;
+h2{
+    text-align:center;
+    color:#d4af37;
+    margin-bottom:40px;
 }
 
-.btn-outline:hover {
-    background-color: #d4af37;
-    color: #000;
+/* ===== Fade Scroll ===== */
+.fade{
+    opacity:0;
+    transform:translateY(40px);
+    transition:all .8s ease;
 }
 
-/* Hero */
-.hero {
-    height: 100vh;
-    background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)),
-    url('https://images.unsplash.com/photo-1555396273-367ea4eb4db5?auto=format&fit=crop&w=1600&q=80') no-repeat center center/cover;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
+.fade.show{
+    opacity:1;
+    transform:translateY(0);
 }
 
-.hero-content h1 {
-    font-size: 60px;
-    font-weight: 700;
-    animation: fadeInDown 1.2s ease forwards;
+/* ===== Menu ===== */
+.menu{
+    background:#141414;
 }
 
-.hero-content p {
-    font-size: 20px;
-    margin: 20px 0;
-    color: #ccc;
+.menu-container{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+    gap:40px;
 }
 
-/* Menu */
-.menu {
-    background-color: #141414;
+.menu-item{
+    display:flex;
+    justify-content:space-between;
+    margin-bottom:10px;
+    color:#ccc;
 }
 
-.menu-container {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: 40px;
-    margin-top: 40px;
+/* ===== Gallery ===== */
+.gallery-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+    gap:20px;
 }
 
-.menu-category h3 {
-    margin-bottom: 20px;
-    border-bottom: 1px solid #d4af37;
-    padding-bottom: 10px;
+.gallery-grid img{
+    width:100%;
+    border-radius:12px;
+    transition:.3s;
 }
 
-.menu-item {
-    display: flex;
-    justify-content: space-between;
-    margin-bottom: 15px;
-    color: #ccc;
+.gallery-grid img:hover{
+    transform:scale(1.05);
 }
 
-/* Gallery */
-.gallery-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 20px;
-    margin-top: 40px;
+/* ===== Footer ===== */
+footer{
+    background:#000;
+    padding:30px;
+    text-align:center;
+    border-top:1px solid #d4af37;
 }
 
-.gallery-grid img {
-    width: 100%;
-    border-radius: 15px;
-    transition: 0.3s ease;
+/* ===== Animations ===== */
+@keyframes fadeDown{
+    from{opacity:0;transform:translateY(-40px);}
+    to{opacity:1;transform:translateY(0);}
 }
 
-.gallery-grid img:hover {
-    transform: scale(1.05);
-}
-
-/* Contact */
-.contact-container {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 40px;
-    margin-top: 40px;
-}
-
-iframe {
-    width: 100%;
-    height: 300px;
-    border-radius: 15px;
-    border: none;
-}
-
-/* Footer */
-footer {
-    background-color: #000;
-    text-align: center;
-    padding: 30px 10%;
-    border-top: 1px solid #d4af37;
-}
-
-/* Responsive */
-@media(max-width: 768px){
-    .hero-content h1 {
-        font-size: 36px;
-    }
-    section {
-        padding: 60px 5%;
-    }
+/* ===== Responsive ===== */
+@media(max-width:768px){
+    .hero h1{font-size:36px;}
+    section{padding:80px 5%;}
 }
 </style>
 </head>
 
 <body>
 
+<div class="navbar">
+    <div class="logo">Kareem Food</div>
+    <div>
+        <a href="#about">About</a>
+        <a href="#menu">Menu</a>
+        <a href="#gallery">Gallery</a>
+        <a href="#contact">Contact</a>
+    </div>
+</div>
+
 <section class="hero">
-    <div class="hero-content">
+    <div>
         <h1>Kareem Food Restaurant</h1>
         <p>Authentic Taste of Mughlai Cuisine</p>
-        <a href="#menu" class="btn btn-primary">View Menu</a>
-        <a href="https://wa.me/91XXXXXXXXXX" class="btn btn-outline">Order on WhatsApp</a>
+        <a href="#menu" class="btn">View Menu</a>
     </div>
 </section>
 
-<section class="about fade">
+<section id="about" class="fade">
     <h2>About Us</h2>
-    <p>
-        Located in Rampur, Uttar Pradesh, Kareem Food Restaurant serves rich and authentic Mughlai & North Indian cuisine. 
-        Our chefs bring traditional recipes with royal flavors, offering a premium dining experience.
+    <p style="text-align:center; max-width:800px; margin:auto; color:#ccc;">
+        Located in Rampur, Uttar Pradesh, Kareem Food Restaurant serves authentic Mughlai cuisine with royal flavours.
     </p>
 </section>
 
-<section class="menu fade" id="menu">
-    <h2 style="text-align:center;">Our Menu</h2>
+<section id="menu" class="menu fade">
+    <h2>Our Menu</h2>
     <div class="menu-container">
-        <div class="menu-category">
-            <h3>Starters</h3>
+        <div>
             <div class="menu-item"><span>Chicken Tikka</span><span>₹280</span></div>
-            <div class="menu-item"><span>Seekh Kebab</span><span>₹250</span></div>
+            <div class="menu-item"><span>Butter Chicken</span><span>₹320</span></div>
+            <div class="menu-item"><span>Mutton Biryani</span><span>₹400</span></div>
         </div>
     </div>
 </section>
 
-<section class="gallery fade">
-    <h2 style="text-align:center;">Gallery</h2>
+<section id="gallery" class="fade">
+    <h2>Gallery</h2>
     <div class="gallery-grid">
         <img src="https://images.unsplash.com/photo-1600891964599-f61ba0e24092?auto=format&fit=crop&w=800&q=80">
         <img src="https://images.unsplash.com/photo-1604908177522-0405f6b2b95a?auto=format&fit=crop&w=800&q=80">
     </div>
 </section>
 
-<section class="contact fade">
-    <h2 style="text-align:center;">Contact Us</h2>
-    <div class="contact-container">
-        <div>
-            <p><strong>Address:</strong> Rampur, UP</p>
-            <p><strong>Phone:</strong> +91-XXXXXXXXXX</p>
-        </div>
-    </div>
+<section id="contact" class="fade">
+    <h2>Contact</h2>
+    <p style="text-align:center; color:#ccc;">Rampur, Uttar Pradesh | +91-XXXXXXXXXX</p>
 </section>
 
 <footer>
@@ -235,26 +223,18 @@ footer {
 </footer>
 
 <script>
-/* Fade on Scroll */
 const faders = document.querySelectorAll('.fade');
 
-const appearOptions = {
-    threshold: 0.2
-};
-
-const appearOnScroll = new IntersectionObserver(function(entries, observer){
-    entries.forEach(entry => {
-        if(!entry.isIntersecting){
-            return;
-        } else {
+const observer = new IntersectionObserver(entries=>{
+    entries.forEach(entry=>{
+        if(entry.isIntersecting){
             entry.target.classList.add('show');
-            observer.unobserve(entry.target);
         }
     });
-}, appearOptions);
+},{threshold:.2});
 
-faders.forEach(fader => {
-    appearOnScroll.observe(fader);
+faders.forEach(fade=>{
+    observer.observe(fade);
 });
 </script>
 
