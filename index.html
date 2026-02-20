@@ -3,13 +3,13 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
-  <title>Kareem Restaurant | Royal Taste</title>
-  <!-- Google Font: Poppins (clean, modern) -->
+  <title>Kareem Restaurant | Royal Indian Taste</title>
+  <!-- Google Font Poppins -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   <style>
-    /* ----- RESET & BASE ----- */
+    /* ---------- RESET & VARIABLES ---------- */
     * {
       margin: 0;
       padding: 0;
@@ -22,23 +22,22 @@
 
     body {
       font-family: 'Poppins', sans-serif;
-      background-color: #0a0a0a; /* deep charcoal */
+      background-color: #0a0a0a; /* charcoal black */
       color: #f0f0f0;
       line-height: 1.6;
       overflow-x: hidden;
     }
 
-    /* ----- COLORS & VARIABLES ----- */
     :root {
       --gold: #d4af37;
       --gold-light: #e4c580;
       --dark-bg: #0a0a0a;
       --charcoal: #1a1a1a;
-      --glass-bg: rgba(10, 10, 10, 0.6);
+      --glass-bg: rgba(10, 10, 10, 0.8);
       --transition: all 0.3s ease;
     }
 
-    /* ----- TYPOGRAPHY & GOLD ACCENTS ----- */
+    /* ---------- TYPOGRAPHY & GOLD ACCENTS ---------- */
     h1, h2, h3 {
       font-weight: 600;
       letter-spacing: 0.5px;
@@ -51,12 +50,12 @@
       display: inline-block;
     }
 
-    h2:after {
+    h2::after {
       content: '';
       position: absolute;
       bottom: -10px;
       left: 0;
-      width: 70px;
+      width: 80px;
       height: 3px;
       background: var(--gold);
     }
@@ -65,7 +64,12 @@
       padding: 100px 5%;
     }
 
-    /* ----- NAVBAR (fixed, glass, scroll effect) ----- */
+    .container {
+      max-width: 1300px;
+      margin: 0 auto;
+    }
+
+    /* ---------- NAVBAR (fixed, glass, mobile hamburger) ---------- */
     #navbar {
       position: fixed;
       top: 0;
@@ -78,15 +82,15 @@
       z-index: 1000;
       transition: background 0.3s ease, backdrop-filter 0.3s ease, box-shadow 0.3s ease;
       backdrop-filter: blur(10px);
-      background: rgba(0, 0, 0, 0.3); /* initial glass */
-      border-bottom: 1px solid rgba(212, 175, 55, 0.2);
+      background: rgba(0, 0, 0, 0.3); /* initial transparent glass */
+      border-bottom: 1px solid rgba(212, 175, 55, 0.15);
     }
 
     #navbar.scrolled {
-      background: rgba(10, 10, 10, 0.95);
-      backdrop-filter: blur(8px);
-      box-shadow: 0 5px 20px rgba(0,0,0,0.5);
-      border-bottom: 1px solid rgba(212, 175, 55, 0.4);
+      background: var(--glass-bg);
+      backdrop-filter: blur(12px);
+      box-shadow: 0 5px 25px rgba(0, 0, 0, 0.6);
+      border-bottom-color: rgba(212, 175, 55, 0.4);
     }
 
     .logo {
@@ -100,6 +104,7 @@
     .nav-links {
       display: flex;
       gap: 2.5rem;
+      transition: var(--transition);
     }
 
     .nav-links a {
@@ -130,30 +135,67 @@
       width: 100%;
     }
 
-    /* mobile nav */
+    /* hamburger icon */
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      cursor: pointer;
+      gap: 6px;
+      z-index: 1100;
+    }
+
+    .hamburger span {
+      width: 30px;
+      height: 3px;
+      background: var(--gold);
+      border-radius: 5px;
+      transition: var(--transition);
+    }
+
+    /* mobile menu */
     @media (max-width: 768px) {
-      .nav-links {
-        gap: 1rem;
-        font-size: 0.9rem;
+      .hamburger {
+        display: flex;
       }
-      .logo {
-        font-size: 1.5rem;
-      }
-      h2 {
-        font-size: 2rem;
-      }
-    }
 
-    @media (max-width: 480px) {
       .nav-links {
-        gap: 0.7rem;
+        position: fixed;
+        top: 0;
+        right: -100%;
+        width: 280px;
+        height: 100vh;
+        background: var(--charcoal);
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        gap: 2rem;
+        transition: right 0.4s ease;
+        box-shadow: -5px 0 20px rgba(0, 0, 0, 0.7);
+        border-left: 1px solid var(--gold);
+        z-index: 1050;
       }
+
+      .nav-links.active {
+        right: 0;
+      }
+
       .nav-links a {
-        font-size: 0.8rem;
+        font-size: 1.3rem;
+      }
+
+      /* hamburger animation (X) */
+      .hamburger.active span:nth-child(1) {
+        transform: rotate(45deg) translate(8px, 8px);
+      }
+      .hamburger.active span:nth-child(2) {
+        opacity: 0;
+      }
+      .hamburger.active span:nth-child(3) {
+        transform: rotate(-45deg) translate(7px, -7px);
       }
     }
 
-    /* ----- HERO SECTION (full screen with overlay) ----- */
+    /* ---------- HERO SECTION ---------- */
     .hero {
       min-height: 100vh;
       display: flex;
@@ -161,9 +203,9 @@
       justify-content: center;
       text-align: center;
       position: relative;
-      background: url('https://images.unsplash.com/photo-1550966871-3ed3cdb5ed0b?w=1600&auto=format&fit=crop') center/cover no-repeat fixed;
-      background-attachment: fixed; /* subtle parallax */
+      background: url('https://images.unsplash.com/photo-1585937363424-63cb314f7792?w=1600&auto=format&fit=crop') center/cover no-repeat fixed;
     }
+    /* fallback: indian restaurant interior */
 
     .hero::before {
       content: '';
@@ -172,30 +214,30 @@
       left: 0;
       width: 100%;
       height: 100%;
-      background: rgba(0, 0, 0, 0.65); /* dark overlay */
+      background: rgba(0, 0, 0, 0.7); /* dark overlay */
       z-index: 1;
     }
 
     .hero-content {
       position: relative;
       z-index: 2;
-      max-width: 800px;
+      max-width: 900px;
       padding: 0 20px;
-      animation: heroEntrance 1.5s ease forwards;
+      animation: slideUp 1.4s ease forwards;
     }
 
-    @keyframes heroEntrance {
-      0% { opacity: 0; transform: translateY(40px); }
+    @keyframes slideUp {
+      0% { opacity: 0; transform: translateY(50px); }
       100% { opacity: 1; transform: translateY(0); }
     }
 
     .hero h1 {
-      font-size: clamp(2.8rem, 8vw, 5rem);
+      font-size: clamp(2.8rem, 10vw, 5.5rem);
       font-weight: 700;
       line-height: 1.2;
       margin-bottom: 1rem;
       color: #fff;
-      text-shadow: 2px 2px 10px rgba(0,0,0,0.5);
+      text-shadow: 2px 2px 12px rgba(0,0,0,0.6);
     }
 
     .hero h1 span {
@@ -218,7 +260,7 @@
     }
 
     .btn {
-      padding: 1rem 2.5rem;
+      padding: 1rem 2.8rem;
       border-radius: 50px;
       font-weight: 600;
       text-transform: uppercase;
@@ -228,6 +270,7 @@
       border: 2px solid var(--gold);
       cursor: pointer;
       font-size: 1rem;
+      display: inline-block;
     }
 
     .btn-primary {
@@ -239,7 +282,7 @@
       background: transparent;
       color: var(--gold);
       transform: scale(1.05);
-      box-shadow: 0 0 15px rgba(212, 175, 55, 0.4);
+      box-shadow: 0 0 20px rgba(212, 175, 55, 0.6);
     }
 
     .btn-secondary {
@@ -251,10 +294,10 @@
       background: var(--gold);
       color: #0a0a0a;
       transform: scale(1.05);
-      box-shadow: 0 0 15px rgba(212, 175, 55, 0.4);
+      box-shadow: 0 0 20px rgba(212, 175, 55, 0.6);
     }
 
-    /* ----- ABOUT SECTION (image + text, fade-in) ----- */
+    /* ---------- ABOUT SECTION ---------- */
     .about-grid {
       display: grid;
       grid-template-columns: 1fr 1fr;
@@ -263,10 +306,10 @@
     }
 
     .about-img {
-      border-radius: 20px;
+      border-radius: 25px;
       overflow: hidden;
-      box-shadow: 0 20px 30px rgba(0,0,0,0.7);
       border: 2px solid rgba(212, 175, 55, 0.3);
+      box-shadow: 0 20px 30px rgba(0,0,0,0.7);
       transition: var(--transition);
     }
 
@@ -275,7 +318,7 @@
       height: 100%;
       object-fit: cover;
       display: block;
-      transition: transform 0.5s;
+      transition: transform 0.6s;
     }
 
     .about-img:hover img {
@@ -283,7 +326,7 @@
     }
 
     .about-text h3 {
-      font-size: 2rem;
+      font-size: 2.2rem;
       margin-bottom: 1.5rem;
       color: var(--gold);
     }
@@ -291,89 +334,84 @@
     .about-text p {
       margin-bottom: 1.2rem;
       color: #ccc;
+      font-size: 1.1rem;
     }
 
-    @media (max-width: 768px) {
-      .about-grid {
-        grid-template-columns: 1fr;
-        gap: 2rem;
-      }
-    }
-
-    /* ----- MENU SECTION (cards) ----- */
+    /* ---------- MENU SECTION ---------- */
     .menu-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
       gap: 2.5rem;
       margin-top: 2rem;
     }
 
     .menu-card {
       background: var(--charcoal);
-      border-radius: 20px;
-      overflow: hidden;
+      border-radius: 25px;
+      padding: 2rem 1.8rem;
       box-shadow: 0 15px 25px rgba(0,0,0,0.5);
       transition: var(--transition);
       border: 1px solid #333;
-    }
-
-    .menu-card:hover {
-      transform: translateY(-15px) scale(1.02);
-      box-shadow: 0 30px 40px rgba(212, 175, 55, 0.2);
-      border-color: var(--gold);
-    }
-
-    .menu-img {
-      height: 220px;
+      text-align: center;
+      position: relative;
       overflow: hidden;
     }
 
-    .menu-img img {
-      width: 100%;
+    .menu-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 5px;
+      height: 0;
+      background: var(--gold);
+      transition: height 0.4s;
+    }
+
+    .menu-card:hover {
+      transform: translateY(-12px);
+      box-shadow: 0 25px 35px rgba(212, 175, 55, 0.2);
+      border-color: var(--gold);
+    }
+
+    .menu-card:hover::before {
       height: 100%;
-      object-fit: cover;
-      transition: transform 0.5s;
     }
 
-    .menu-card:hover .menu-img img {
-      transform: scale(1.1);
-    }
-
-    .menu-info {
-      padding: 1.8rem 1.5rem 2rem;
-    }
-
-    .menu-info h3 {
-      font-size: 1.6rem;
-      margin-bottom: 0.5rem;
+    .menu-card h3 {
+      font-size: 1.9rem;
+      margin-bottom: 0.8rem;
       color: #fff;
     }
 
-    .menu-info p {
+    .menu-card p {
       color: #aaa;
-      margin-bottom: 1rem;
-      font-size: 0.95rem;
+      margin-bottom: 1.5rem;
+      font-size: 1rem;
+      font-style: italic;
     }
 
     .price {
-      font-size: 1.6rem;
+      font-size: 2rem;
       font-weight: 700;
       color: var(--gold);
+      display: block;
     }
 
-    /* ----- GALLERY SECTION (grid hover zoom) ----- */
+    /* ---------- GALLERY SECTION ---------- */
     .gallery-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-      gap: 1.5rem;
+      gap: 1.8rem;
     }
 
     .gallery-item {
-      border-radius: 15px;
+      border-radius: 20px;
       overflow: hidden;
       aspect-ratio: 1 / 1;
       border: 2px solid transparent;
       transition: border 0.3s;
+      box-shadow: 0 8px 15px rgba(0,0,0,0.6);
     }
 
     .gallery-item img {
@@ -392,7 +430,7 @@
       transform: scale(1.1);
     }
 
-    /* ----- CONTACT SECTION (modern form) ----- */
+    /* ---------- CONTACT SECTION ---------- */
     .contact-container {
       display: grid;
       grid-template-columns: 1fr 1fr;
@@ -420,12 +458,13 @@
       align-items: center;
       gap: 1rem;
       margin-bottom: 1.5rem;
+      font-size: 1.1rem;
     }
 
-    .contact-detail i { /* we'll use simple utf8 icons as fallback */
-      font-size: 1.5rem;
+    .contact-detail .icon {
       color: var(--gold);
-      width: 30px;
+      font-weight: 600;
+      min-width: 30px;
     }
 
     .form-group {
@@ -439,7 +478,7 @@
       padding: 1rem 1.2rem;
       background: #2a2a2a;
       border: 1px solid #444;
-      border-radius: 12px;
+      border-radius: 16px;
       font-family: 'Poppins', sans-serif;
       font-size: 1rem;
       color: #fff;
@@ -455,20 +494,21 @@
     .form-group input:focus,
     .form-group textarea:focus {
       border-color: var(--gold);
-      box-shadow: 0 0 0 3px rgba(212, 175, 55, 0.2);
-      transform: scale(1.02);
+      box-shadow: 0 0 0 4px rgba(212, 175, 55, 0.2);
       background: #222;
+      transform: scale(1.01);
     }
 
     .form-group label {
       position: absolute;
-      left: 1rem;
-      top: -0.7rem;
+      left: 1.2rem;
+      top: -0.6rem;
       background: var(--charcoal);
-      padding: 0 0.5rem;
+      padding: 0 0.6rem;
       font-size: 0.85rem;
       color: var(--gold);
-      border-radius: 4px;
+      border-radius: 10px;
+      font-weight: 500;
     }
 
     .submit-btn {
@@ -482,26 +522,27 @@
       transition: var(--transition);
       font-size: 1.1rem;
       width: 100%;
+      border: 2px solid var(--gold);
     }
 
     .submit-btn:hover {
       background: transparent;
       color: var(--gold);
-      border: 2px solid var(--gold);
       transform: scale(1.02);
+      box-shadow: 0 0 15px rgba(212, 175, 55, 0.5);
     }
 
-    @media (max-width: 768px) {
-      .contact-container {
-        grid-template-columns: 1fr;
-        padding: 2rem;
-      }
+    .error-message {
+      color: #ff6b6b;
+      font-size: 0.85rem;
+      margin-top: 5px;
+      display: none;
     }
 
-    /* ----- FOOTER (simple elegant) ----- */
+    /* ---------- FOOTER ---------- */
     footer {
       background: #0a0a0a;
-      padding: 2.5rem 5%;
+      padding: 3rem 5%;
       border-top: 1px solid rgba(212, 175, 55, 0.2);
       text-align: center;
     }
@@ -510,11 +551,11 @@
       display: flex;
       flex-direction: column;
       align-items: center;
-      gap: 1.5rem;
+      gap: 1.8rem;
     }
 
     .footer-logo {
-      font-size: 2rem;
+      font-size: 2.2rem;
       font-weight: 700;
       color: var(--gold);
     }
@@ -524,29 +565,35 @@
       gap: 2rem;
     }
 
-    .social-links a {
+    .social-icon {
       color: #aaa;
       text-decoration: none;
-      font-size: 1.2rem;
+      font-size: 1.3rem;
       transition: var(--transition);
-      border-bottom: 1px solid transparent;
+      width: 45px;
+      height: 45px;
+      border-radius: 50%;
+      border: 1px solid #444;
+      display: flex;
+      align-items: center;
+      justify-content: center;
     }
 
-    .social-links a:hover {
+    .social-icon:hover {
       color: var(--gold);
-      border-bottom-color: var(--gold);
+      border-color: var(--gold);
+      transform: translateY(-5px);
     }
 
     .copyright {
       color: #777;
-      font-size: 0.9rem;
-      margin-top: 1rem;
+      font-size: 0.95rem;
     }
 
-    /* ----- SCROLL REVEAL ANIMATION (intersection observer) ----- */
+    /* ---------- REVEAL ON SCROLL (Intersection Observer) ---------- */
     .reveal {
       opacity: 0;
-      transform: translateY(30px);
+      transform: translateY(35px);
       transition: opacity 0.8s ease, transform 0.8s ease;
     }
 
@@ -555,21 +602,45 @@
       transform: translateY(0);
     }
 
-    /* small tweaks */
-    .gold-text {
-      color: var(--gold);
+    /* ---------- RESPONSIVE FIXES ---------- */
+    @media (max-width: 768px) {
+      .section-padding {
+        padding: 70px 5%;
+      }
+      h2 {
+        font-size: 2rem;
+      }
+      .about-grid {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+      }
+      .contact-container {
+        grid-template-columns: 1fr;
+        padding: 2rem;
+      }
+      .hero {
+        background-attachment: scroll;
+      }
     }
-    .container {
-      max-width: 1300px;
-      margin: 0 auto;
+
+    @media (max-width: 480px) {
+      .btn {
+        padding: 0.8rem 1.8rem;
+        font-size: 0.9rem;
+      }
     }
   </style>
 </head>
 <body>
-  <!-- fixed navbar with glass effect -->
+  <!-- FIXED NAVBAR -->
   <nav id="navbar">
     <a href="#" class="logo">Kareem's</a>
-    <div class="nav-links">
+    <div class="hamburger" id="hamburger">
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
+    <div class="nav-links" id="navLinks">
       <a href="#home">Home</a>
       <a href="#about">About</a>
       <a href="#menu">Menu</a>
@@ -578,120 +649,111 @@
     </div>
   </nav>
 
-  <!-- HERO / HOME -->
+  <!-- HERO SECTION -->
   <section id="home" class="hero">
     <div class="hero-content">
       <h1>Experience <span>Royal Taste</span></h1>
-      <p>Authentic flavors crafted with passion.</p>
+      <p>Authentic Indian flavors crafted with passion.</p>
       <div class="btn-group">
         <a href="#menu" class="btn btn-primary">View Menu</a>
-        <a href="#contact" class="btn btn-secondary">Book Table</a>
+        <a href="#contact" class="btn btn-secondary">Book a Table</a>
       </div>
     </div>
   </section>
 
   <!-- ABOUT SECTION -->
   <section id="about" class="section-padding container reveal">
-    <h2>Our Story</h2>
+    <h2>Our Legacy</h2>
     <div class="about-grid">
       <div class="about-img">
-        <img src="https://images.unsplash.com/photo-1577219491135-ce391730fb2c?w=800&auto=format&fit=crop" alt="Chef preparing food">
+        <img src="https://images.unsplash.com/photo-1589302168068-964664d93dc0?w=800&auto=format&fit=crop" alt="Chef in Indian kitchen">
       </div>
       <div class="about-text">
         <h3>Kareem Restaurant</h3>
-        <p>Founded in 2010, Kareem Restaurant brings the authentic taste of royal kitchens to your table. Our chefs master the art of blending traditional spices with modern techniques.</p>
-        <p>We source only the freshest ingredients and believe in crafting dishes that tell a story. Every plate is a journey through centuries of culinary heritage, presented with contemporary elegance.</p>
-        <p>Whether it's a romantic dinner or a family gathering, our ambiance and service ensure an unforgettable experience.</p>
+        <p>Since 1975, Kareem's has been serving the finest Mughlai and Indian cuisine, preserving age-old recipes passed down through generations. Our chefs bring the royal kitchens of Awadh to your plate.</p>
+        <p>We blend traditional spices with contemporary elegance to create an unforgettable dining experience. Every dish is a celebration of India's rich culinary heritage.</p>
+        <p>From our signature biryanis to silky dal makhani, each bite tells a story of passion and authenticity.</p>
       </div>
     </div>
   </section>
 
-  <!-- MENU SECTION -->
+  <!-- MENU SECTION (6 Indian dishes with ₹) -->
   <section id="menu" class="section-padding container reveal">
-    <h2>Signature Menu</h2>
+    <h2>Royal Menu</h2>
     <div class="menu-grid">
-      <!-- card 1 -->
       <div class="menu-card">
-        <div class="menu-img">
-          <img src="https://images.unsplash.com/photo-1600891964092-4316c288032e?w=600&auto=format&fit=crop" alt="Grilled Steak">
-        </div>
-        <div class="menu-info">
-          <h3>Gold Ribeye</h3>
-          <p>Prime cut, aged 30 days, served with rosemary jus</p>
-          <span class="price">$48</span>
-        </div>
+        <h3>Chicken Biryani</h3>
+        <p>Aromatic basmati rice with spiced chicken</p>
+        <span class="price">₹280</span>
       </div>
-      <!-- card 2 -->
       <div class="menu-card">
-        <div class="menu-img">
-          <img src="https://images.unsplash.com/photo-1621996346565-e3dbc646d9a9?w=600&auto=format&fit=crop" alt="Truffle Pasta">
-        </div>
-        <div class="menu-info">
-          <h3>Truffle Fettuccine</h3>
-          <p>Handmade pasta, black truffle, parmesan cream</p>
-          <span class="price">$36</span>
-        </div>
+        <h3>Butter Chicken</h3>
+        <p>Rich tomato-cream gravy with tender chicken</p>
+        <span class="price">₹320</span>
       </div>
-      <!-- card 3 -->
       <div class="menu-card">
-        <div class="menu-img">
-          <img src="https://images.unsplash.com/photo-1512621776951-a57141f2eefd?w=600&auto=format&fit=crop" alt="Garden Salad">
-        </div>
-        <div class="menu-info">
-          <h3>Royal Garden</h3>
-          <p>Organic greens, edible flowers, honey vinaigrette</p>
-          <span class="price">$22</span>
-        </div>
+        <h3>Paneer Tikka</h3>
+        <p>Grilled cottage cheese with bell peppers</p>
+        <span class="price">₹250</span>
       </div>
-      <!-- card 4 -->
       <div class="menu-card">
-        <div class="menu-img">
-          <img src="https://images.unsplash.com/photo-1551024506-0bccd828d307?w=600&auto=format&fit=crop" alt="Gold Leaf Dessert">
-        </div>
-        <div class="menu-info">
-          <h3>24k Chocolate Soufflé</h3>
-          <p>Warm chocolate with gold leaf, vanilla bean ice cream</p>
-          <span class="price">$19</span>
-        </div>
+        <h3>Mutton Korma</h3>
+        <p>Slow-cooked mutton in spiced yogurt gravy</p>
+        <span class="price">₹380</span>
+      </div>
+      <div class="menu-card">
+        <h3>Dal Makhani</h3>
+        <p>Black lentils simmered overnight with butter</p>
+        <span class="price">₹220</span>
+      </div>
+      <div class="menu-card">
+        <h3>Tandoori Roti</h3>
+        <p>Whole wheat bread baked in clay oven</p>
+        <span class="price">₹40</span>
       </div>
     </div>
   </section>
 
-  <!-- GALLERY SECTION -->
+  <!-- GALLERY SECTION (6 images) -->
   <section id="gallery" class="section-padding container reveal">
-    <h2>Visual Delights</h2>
+    <h2>Visual Feast</h2>
     <div class="gallery-grid">
-      <div class="gallery-item"><img src="https://images.unsplash.com/photo-1476224203421-9ac39bcb3327?w=600&h=600&fit=crop" alt="Dish 1"></div>
-      <div class="gallery-item"><img src="https://images.unsplash.com/photo-1543353071-10c8ba85a904?w=600&h=600&fit=crop" alt="Dish 2"></div>
-      <div class="gallery-item"><img src="https://images.unsplash.com/photo-1567620905732-2d1ec7ab7445?w=600&h=600&fit=crop" alt="Dish 3"></div>
-      <div class="gallery-item"><img src="https://images.unsplash.com/photo-1565958011703-44f9829ba187?w=600&h=600&fit=crop" alt="Dish 4"></div>
+      <div class="gallery-item"><img src="https://images.unsplash.com/photo-1603894584373-5ac82b2ae398?w=600&h=600&fit=crop" alt="Indian thali"></div>
+      <div class="gallery-item"><img src="https://images.unsplash.com/photo-1589302168068-964664d93dc0?w=600&h=600&fit=crop" alt="Grilled food"></div>
+      <div class="gallery-item"><img src="https://images.unsplash.com/photo-1565557623262-b1cacc9c05ff?w=600&h=600&fit=crop" alt="Biryani"></div>
+      <div class="gallery-item"><img src="https://images.unsplash.com/photo-1631452180519-c014fe946bc7?w=600&h=600&fit=crop" alt="Indian sweets"></div>
+      <div class="gallery-item"><img src="https://images.unsplash.com/photo-1626777552726-4a6b54c97e46?w=600&h=600&fit=crop" alt="Tandoori"></div>
+      <div class="gallery-item"><img src="https://images.unsplash.com/photo-1589301760014-d929f3979dbc?w=600&h=600&fit=crop" alt="Restaurant interior"></div>
     </div>
   </section>
 
-  <!-- CONTACT SECTION -->
+  <!-- CONTACT SECTION with form validation -->
   <section id="contact" class="section-padding container reveal">
     <h2>Reserve Your Table</h2>
     <div class="contact-container">
       <div class="contact-info">
         <h3>Get in touch</h3>
-        <p>We’d love to hear from you. Book a table or ask us anything.</p>
-        <div class="contact-detail"><span style="color: var(--gold);">📍</span> 42 King’s Road, London</div>
-        <div class="contact-detail"><span style="color: var(--gold);">📞</span> +44 20 7946 0138</div>
-        <div class="contact-detail"><span style="color: var(--gold);">✉️</span> reserve@kareemrestaurant.com</div>
-        <div style="margin-top: 2rem; font-style: italic; color: #aaa;">Open daily: 12pm – 11pm</div>
+        <p>We're here to make your dining experience memorable.</p>
+        <div class="contact-detail"><span class="icon">📍</span> 15, Heritage Lane, Connaught Place, New Delhi</div>
+        <div class="contact-detail"><span class="icon">📞</span> +91 11 4987 6543</div>
+        <div class="contact-detail"><span class="icon">✉️</span> reserve@kareemrestaurant.com</div>
+        <div style="margin-top: 2rem; color: #aaa;">Open daily: 12pm – 11:30pm</div>
       </div>
-      <form class="contact-form" id="contactForm" onsubmit="event.preventDefault(); alert('Thank you! We will contact you soon.');">
+      <form id="contactForm" class="contact-form" novalidate>
         <div class="form-group">
           <label for="name">Full Name</label>
           <input type="text" id="name" name="name" required>
+          <div class="error-message" id="nameError">Name is required</div>
         </div>
         <div class="form-group">
           <label for="email">Email</label>
           <input type="email" id="email" name="email" required>
+          <div class="error-message" id="emailError">Valid email is required</div>
         </div>
         <div class="form-group">
           <label for="message">Message / Special requests</label>
-          <textarea id="message" name="message" rows="4"></textarea>
+          <textarea id="message" name="message" required></textarea>
+          <div class="error-message" id="messageError">Message cannot be empty</div>
         </div>
         <button type="submit" class="submit-btn">Send Reservation</button>
       </form>
@@ -703,9 +765,9 @@
     <div class="footer-content">
       <div class="footer-logo">Kareem Restaurant</div>
       <div class="social-links">
-        <a href="#">FB</a>
-        <a href="#">IG</a>
-        <a href="#">X</a>
+        <a href="#" class="social-icon">FB</a>
+        <a href="#" class="social-icon">IG</a>
+        <a href="#" class="social-icon">TW</a>
       </div>
       <div class="copyright">© 2025 Kareem Restaurant. All rights reserved.</div>
     </div>
@@ -713,22 +775,39 @@
 
   <script>
     (function() {
-      // ========== NAVBAR BACKGROUND CHANGE ON SCROLL ==========
+      // ---------- NAVBAR SCROLL EFFECT ----------
       const navbar = document.getElementById('navbar');
       window.addEventListener('scroll', () => {
-        if (window.scrollY > 50) {
+        if (window.scrollY > 60) {
           navbar.classList.add('scrolled');
         } else {
           navbar.classList.remove('scrolled');
         }
       });
 
-      // ========== SMOOTH SCROLL NAVIGATION (with offset for fixed header) ==========
-      const navLinks = document.querySelectorAll('.nav-links a');
-      navLinks.forEach(link => {
+      // ---------- HAMBURGER MENU TOGGLE ----------
+      const hamburger = document.getElementById('hamburger');
+      const navLinks = document.getElementById('navLinks');
+
+      hamburger.addEventListener('click', (e) => {
+        e.stopPropagation();
+        hamburger.classList.toggle('active');
+        navLinks.classList.toggle('active');
+      });
+
+      // Close menu when a link is clicked
+      document.querySelectorAll('.nav-links a').forEach(link => {
+        link.addEventListener('click', () => {
+          hamburger.classList.remove('active');
+          navLinks.classList.remove('active');
+        });
+      });
+
+      // ---------- SMOOTH SCROLL OFFSET (for fixed header) ----------
+      document.querySelectorAll('.nav-links a').forEach(link => {
         link.addEventListener('click', function(e) {
           e.preventDefault();
-          const targetId = this.getAttribute('href'); // e.g. #about
+          const targetId = this.getAttribute('href');
           if (targetId === '#home' || targetId === '#') {
             window.scrollTo({ top: 0, behavior: 'smooth' });
             return;
@@ -737,7 +816,7 @@
           if (targetElement) {
             const navbarHeight = navbar.offsetHeight;
             const elementPosition = targetElement.getBoundingClientRect().top + window.pageYOffset;
-            const offsetPosition = elementPosition - navbarHeight - 20; // extra spacing
+            const offsetPosition = elementPosition - navbarHeight - 20; // extra padding
 
             window.scrollTo({
               top: offsetPosition,
@@ -747,47 +826,71 @@
         });
       });
 
-      // ========== INTERSECTION OBSERVER (FADE-IN ON SCROLL) ==========
+      // ---------- INTERSECTION OBSERVER (fade-in reveal) ----------
       const revealElements = document.querySelectorAll('.reveal');
-      
       const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
           if (entry.isIntersecting) {
             entry.target.classList.add('show');
-            // optional: keep visible after first reveal (no need to unobserve, but we can)
           }
         });
-      }, { threshold: 0.15, rootMargin: '0px 0px -20px 0px' }); // trigger a bit before
+      }, { threshold: 0.15, rootMargin: '0px 0px -20px 0px' });
 
       revealElements.forEach(el => observer.observe(el));
 
-      // pre-show hero if already visible (it is on load) but hero doesn't need observer because it has its own entrance
-      // but we also want about etc to start hidden.
-      // For any element that might already be visible on load (like about if page loads scrolled down) observer handles it.
-      
-      // ========== BUTTON ANIMATIONS ARE HANDLED BY CSS ==========
-      
-      // ========== (optional) force hero to be visible, already done by CSS animation ==========
+      // ---------- CONTACT FORM VALIDATION ----------
+      const contactForm = document.getElementById('contactForm');
+      const nameInput = document.getElementById('name');
+      const emailInput = document.getElementById('email');
+      const messageInput = document.getElementById('message');
+      const nameError = document.getElementById('nameError');
+      const emailError = document.getElementById('emailError');
+      const messageError = document.getElementById('messageError');
 
-      // ========== ENSURE NAVBAR LINK ACTIVE STATE ON SCROLL (nice but not required) ==========
-      // optional: we could highlight active section, but not requested.
+      function validateEmail(email) {
+        return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+      }
 
-      // ========== FORM SUBMIT PREVENTION AND FEEDBACK (already in onsubmit) ==========
+      contactForm.addEventListener('submit', (e) => {
+        e.preventDefault();
+        let isValid = true;
+
+        // Name validation
+        if (!nameInput.value.trim()) {
+          nameError.style.display = 'block';
+          isValid = false;
+        } else {
+          nameError.style.display = 'none';
+        }
+
+        // Email validation
+        if (!validateEmail(emailInput.value.trim())) {
+          emailError.style.display = 'block';
+          isValid = false;
+        } else {
+          emailError.style.display = 'none';
+        }
+
+        // Message validation
+        if (!messageInput.value.trim()) {
+          messageError.style.display = 'block';
+          isValid = false;
+        } else {
+          messageError.style.display = 'none';
+        }
+
+        if (isValid) {
+          alert('Thank you! Your reservation request has been sent. We’ll contact you shortly.');
+          contactForm.reset();
+        }
+      });
     })();
   </script>
 
-  <!-- ensure that images with fixed background on mobile don't cause lag - adjust hero background attachment for mobile -->
+  <!-- small extra style for error messages -->
   <style>
-    @media (max-width: 768px) {
-      .hero {
-        background-attachment: scroll; /* better performance */
-      }
-    }
-    /* additional micro fix for hero overlay */
-    .hero-content .btn {
-      pointer-events: auto;
-    }
-    /* make sure reveal works when JS is off? But we use JS */
+    .error-message { display: none; color: #ff8a8a; margin-top: 5px; font-size: 0.85rem; }
+    .form-group input:invalid:focus, .form-group textarea:invalid:focus { border-color: #ff8a8a; }
   </style>
 </body>
 </html>
